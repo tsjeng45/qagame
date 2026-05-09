@@ -3,24 +3,13 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main # 如果您的主分支是 master，請將這裡改為 master
+      - main # 如果您的主分支是 master，請改為 master
 
-# 設定 GITHUB_TOKEN 的權限以允許部署到 GitHub Pages
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# 允許一個同時進行的部署
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
+  contents: write # 允許 Action 推送程式碼到 gh-pages 分支
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -42,14 +31,8 @@ jobs:
           VITE_QUESTION_COUNT: ${{ secrets.VITE_QUESTION_COUNT || 5 }}
         run: npm run build
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: './dist'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist

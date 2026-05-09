@@ -78,9 +78,12 @@
    - Name: `VITE_GOOGLE_APP_SCRIPT_URL` / Secret: `您的 GAS URL`
    - Name: `VITE_PASS_THRESHOLD` / Secret: `3` (過關及格門檻)
    - Name: `VITE_QUESTION_COUNT` / Secret: `5` (抽題數量)
-5. 在左側選單找到 **「Pages」**。
-6. 在「Build and deployment」區塊的「Source」下拉選單，選擇 **「GitHub Actions」**。
-7. 當您將程式碼推送到 `main` 或 `master` 分支後，GitHub Actions 就會自動運行。完成後即可在 Pages 設定頁面取得您的專屬網址！
+5. 當您將程式碼推送到 `main` 或 `master` 分支後，GitHub Actions 就會自動運行。
+6. 等待 Actions 執行完畢（這會自動幫您建立一個 `gh-pages` 分支）。
+7. 在左側選單找到 **「Pages」**。
+8. 在「Build and deployment」區塊的「Source」下拉選單，選擇 **「Deploy from a branch」**。
+9. 在 Branch 的下拉選單選擇 **`gh-pages`**，然後點擊 **「Save」**。
+10. 完成後即可在最上方取得您的專屬網址！
 
 ---
 
